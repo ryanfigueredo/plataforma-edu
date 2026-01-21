@@ -2,7 +2,7 @@
 # Força uso de PHP 8.2 ao invés de 8.1
 
 [phases.setup]
-nixPkgs = { php = "php82", nginx = "nginx", libmysqlclient = "libmysqlclient", composer = "php82Packages.composer", nodejs = "nodejs_18", npm = "npm-9_x" }
+nixPkgs = ["php82", "nginx", "libmysqlclient", "php82Packages.composer", "nodejs_18", "npm-9_x"]
 
 [phases.install]
 cmds = [
