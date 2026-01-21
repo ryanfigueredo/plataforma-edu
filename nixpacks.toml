@@ -1,0 +1,19 @@
+# Configuração Nixpacks para Railway
+# Força uso de PHP 8.2 ao invés de 8.1
+
+[phases.setup]
+nixPkgs = { php = "php82", nginx = "nginx", libmysqlclient = "libmysqlclient", composer = "php82Packages.composer", nodejs = "nodejs_18", npm = "npm-9_x" }
+
+[phases.install]
+cmds = [
+  "mkdir -p /var/log/nginx && mkdir -p /var/cache/nginx",
+  "composer install --ignore-platform-reqs"
+]
+
+[phases.build]
+cmds = [
+  "composer install --no-dev --optimize-autoloader && php artisan config:cache && php artisan route:cache && php artisan view:cache"
+]
+
+[start]
+cmd = "php artisan serve --host=0.0.0.0 --port=$PORT"
